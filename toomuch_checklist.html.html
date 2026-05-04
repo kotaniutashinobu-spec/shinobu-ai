@@ -1,0 +1,766 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>「抱えすぎ」チェックリスト｜YOHAKU</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+JP:wght@300;400;600&family=Noto+Sans+JP:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --blue-dark:  #5C6E7E;
+    --blue-mid:   #7E9BAD;
+    --blue-light: #B8CDD8;
+    --blue-pale:  #E4EDF2;
+    --blue-bg:    #F2F6F9;
+    --green:      #8FA882;
+    --green-pale: #D6E4D0;
+    --gray-dark:  #4A4A4A;
+    --gray-mid:   #7A7A7A;
+    --gray-light: #C8C8C8;
+    --white:      #FFFFFF;
+    --off-white:  #F8F9FA;
+    --ink:        #2C3540;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    font-family: 'Noto Sans JP', sans-serif;
+    background: var(--blue-bg);
+    color: var(--ink);
+    min-height: 100vh;
+    font-size: 15px;
+    line-height: 1.8;
+  }
+
+  /* ── ヘッダー ── */
+  .hero {
+    background: var(--blue-dark);
+    padding: 52px 24px 44px;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+  }
+  .hero::before {
+    content: '';
+    position: absolute;
+    top: -60px; right: -60px;
+    width: 220px; height: 220px;
+    border-radius: 50%;
+    background: rgba(255,255,255,0.04);
+  }
+  .hero::after {
+    content: '';
+    position: absolute;
+    bottom: -40px; left: -30px;
+    width: 160px; height: 160px;
+    border-radius: 50%;
+    background: rgba(255,255,255,0.04);
+  }
+  .hero-eyebrow {
+    font-family: 'Noto Serif JP', serif;
+    font-size: 11px;
+    letter-spacing: 0.35em;
+    color: var(--blue-light);
+    margin-bottom: 16px;
+    text-transform: uppercase;
+  }
+  .hero h1 {
+    font-family: 'Noto Serif JP', serif;
+    font-size: clamp(22px, 5vw, 32px);
+    font-weight: 300;
+    color: var(--white);
+    letter-spacing: 0.08em;
+    line-height: 1.5;
+    margin-bottom: 20px;
+  }
+  .hero h1 em {
+    font-style: normal;
+    color: var(--blue-light);
+    font-weight: 600;
+  }
+  .hero-sub {
+    font-size: 13px;
+    color: rgba(255,255,255,0.65);
+    max-width: 480px;
+    margin: 0 auto;
+    line-height: 1.9;
+    letter-spacing: 0.03em;
+  }
+
+  /* ── プログレスバー ── */
+  .progress-wrap {
+    background: var(--white);
+    padding: 20px 24px;
+    border-bottom: 1px solid var(--blue-pale);
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    box-shadow: 0 2px 12px rgba(92,110,126,0.08);
+  }
+  .progress-inner {
+    max-width: 640px;
+    margin: 0 auto;
+    display: flex;
+    align-items: center;
+    gap: 14px;
+  }
+  .progress-bar-bg {
+    flex: 1;
+    height: 6px;
+    background: var(--blue-pale);
+    border-radius: 3px;
+    overflow: hidden;
+  }
+  .progress-bar-fill {
+    height: 100%;
+    background: linear-gradient(90deg, var(--blue-mid), var(--green));
+    border-radius: 3px;
+    width: 0%;
+    transition: width 0.5s cubic-bezier(0.34,1.56,0.64,1);
+  }
+  .progress-label {
+    font-size: 12px;
+    color: var(--blue-dark);
+    font-weight: 500;
+    white-space: nowrap;
+    min-width: 48px;
+    text-align: right;
+  }
+
+  /* ── メインコンテンツ ── */
+  .container {
+    max-width: 640px;
+    margin: 0 auto;
+    padding: 32px 16px 60px;
+  }
+
+  /* ── セクション ── */
+  .section {
+    background: var(--white);
+    border-radius: 16px;
+    margin-bottom: 20px;
+    overflow: hidden;
+    box-shadow: 0 2px 16px rgba(92,110,126,0.07);
+    transition: box-shadow 0.3s;
+  }
+  .section:hover {
+    box-shadow: 0 4px 24px rgba(92,110,126,0.12);
+  }
+  .section-header {
+    padding: 20px 24px 16px;
+    border-bottom: 1px solid var(--blue-pale);
+    display: flex;
+    align-items: flex-start;
+    gap: 14px;
+  }
+  .section-num {
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    background: var(--blue-dark);
+    color: var(--white);
+    font-family: 'Noto Serif JP', serif;
+    font-size: 13px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    margin-top: 2px;
+  }
+  .section-title-wrap {}
+  .section-title {
+    font-family: 'Noto Serif JP', serif;
+    font-size: 16px;
+    font-weight: 600;
+    color: var(--blue-dark);
+    letter-spacing: 0.03em;
+    line-height: 1.4;
+  }
+  .section-sub {
+    font-size: 12px;
+    color: var(--gray-mid);
+    margin-top: 3px;
+    letter-spacing: 0.02em;
+  }
+  .section-score {
+    margin-left: auto;
+    text-align: right;
+    flex-shrink: 0;
+  }
+  .section-score-num {
+    font-family: 'Noto Serif JP', serif;
+    font-size: 22px;
+    font-weight: 600;
+    color: var(--blue-dark);
+    line-height: 1;
+  }
+  .section-score-den {
+    font-size: 11px;
+    color: var(--gray-mid);
+  }
+
+  /* ── チェック項目 ── */
+  .items {
+    padding: 8px 0;
+  }
+  .item {
+    display: flex;
+    align-items: flex-start;
+    gap: 14px;
+    padding: 12px 24px;
+    cursor: pointer;
+    transition: background 0.2s;
+    border-bottom: 1px solid var(--off-white);
+    -webkit-tap-highlight-color: transparent;
+    user-select: none;
+  }
+  .item:last-child { border-bottom: none; }
+  .item:hover { background: var(--blue-bg); }
+  .item.checked { background: #EEF4F0; }
+
+  .checkbox {
+    width: 22px;
+    height: 22px;
+    border-radius: 6px;
+    border: 2px solid var(--blue-light);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    margin-top: 1px;
+    transition: all 0.2s cubic-bezier(0.34,1.56,0.64,1);
+    background: var(--white);
+  }
+  .item.checked .checkbox {
+    background: var(--green);
+    border-color: var(--green);
+    transform: scale(1.08);
+  }
+  .checkmark {
+    opacity: 0;
+    transform: scale(0.5);
+    transition: all 0.2s cubic-bezier(0.34,1.56,0.64,1);
+  }
+  .item.checked .checkmark {
+    opacity: 1;
+    transform: scale(1);
+  }
+  .item-text {
+    font-size: 14px;
+    color: var(--gray-dark);
+    line-height: 1.7;
+    flex: 1;
+    padding-top: 1px;
+    transition: color 0.2s;
+  }
+  .item.checked .item-text {
+    color: var(--ink);
+    font-weight: 500;
+  }
+
+  /* ── スコア表示 ── */
+  .score-wrap {
+    background: var(--white);
+    border-radius: 16px;
+    margin-bottom: 20px;
+    overflow: hidden;
+    box-shadow: 0 2px 16px rgba(92,110,126,0.07);
+  }
+  .score-header {
+    background: var(--blue-dark);
+    padding: 20px 24px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+  .score-header-label {
+    font-family: 'Noto Serif JP', serif;
+    font-size: 14px;
+    color: var(--white);
+    letter-spacing: 0.05em;
+  }
+  .score-total {
+    font-family: 'Noto Serif JP', serif;
+    font-size: 13px;
+    color: var(--blue-light);
+  }
+  .score-total span {
+    font-size: 28px;
+    font-weight: 600;
+    color: var(--white);
+    margin-right: 2px;
+  }
+
+  .score-bars {
+    padding: 20px 24px;
+    display: grid;
+    gap: 12px;
+  }
+  .score-row {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+  .score-row-label {
+    font-size: 12px;
+    color: var(--gray-mid);
+    width: 100px;
+    flex-shrink: 0;
+    line-height: 1.3;
+  }
+  .mini-bar-bg {
+    flex: 1;
+    height: 8px;
+    background: var(--blue-pale);
+    border-radius: 4px;
+    overflow: hidden;
+  }
+  .mini-bar-fill {
+    height: 100%;
+    border-radius: 4px;
+    width: 0%;
+    transition: width 0.7s cubic-bezier(0.34,1.56,0.64,1);
+  }
+  .score-row-val {
+    font-size: 13px;
+    font-weight: 500;
+    color: var(--blue-dark);
+    width: 36px;
+    text-align: right;
+    flex-shrink: 0;
+  }
+
+  /* ── 判定メッセージ ── */
+  .result-wrap {
+    background: var(--white);
+    border-radius: 16px;
+    margin-bottom: 20px;
+    overflow: hidden;
+    box-shadow: 0 2px 16px rgba(92,110,126,0.07);
+    opacity: 0;
+    transform: translateY(12px);
+    transition: opacity 0.5s, transform 0.5s;
+  }
+  .result-wrap.visible {
+    opacity: 1;
+    transform: none;
+  }
+  .result-tag {
+    padding: 12px 24px;
+    font-size: 12px;
+    letter-spacing: 0.1em;
+    font-weight: 500;
+  }
+  .result-body {
+    padding: 0 24px 24px;
+  }
+  .result-title {
+    font-family: 'Noto Serif JP', serif;
+    font-size: 18px;
+    font-weight: 600;
+    line-height: 1.5;
+    margin-bottom: 10px;
+  }
+  .result-desc {
+    font-size: 13px;
+    color: var(--gray-mid);
+    line-height: 1.9;
+  }
+
+  /* 判定レベル別カラー */
+  .level-0 .result-tag { background: var(--green-pale); color: #4A7A3D; }
+  .level-0 .result-title { color: #4A7A3D; }
+  .level-1 .result-tag { background: var(--blue-pale); color: var(--blue-dark); }
+  .level-1 .result-title { color: var(--blue-dark); }
+  .level-2 .result-tag { background: #FEF3CD; color: #8A6500; }
+  .level-2 .result-title { color: #8A6500; }
+  .level-3 .result-tag { background: #FDECEA; color: #9B3B3B; }
+  .level-3 .result-title { color: #9B3B3B; }
+
+  /* ── 振り返りメモ ── */
+  .memo-wrap {
+    background: var(--white);
+    border-radius: 16px;
+    margin-bottom: 20px;
+    padding: 24px;
+    box-shadow: 0 2px 16px rgba(92,110,126,0.07);
+  }
+  .memo-label {
+    font-family: 'Noto Serif JP', serif;
+    font-size: 14px;
+    color: var(--blue-dark);
+    margin-bottom: 12px;
+    font-weight: 600;
+  }
+  .memo-sub {
+    font-size: 12px;
+    color: var(--gray-mid);
+    margin-bottom: 14px;
+  }
+  .memo-textarea {
+    width: 100%;
+    border: 1.5px solid var(--blue-pale);
+    border-radius: 10px;
+    padding: 14px 16px;
+    font-family: 'Noto Sans JP', sans-serif;
+    font-size: 14px;
+    color: var(--ink);
+    resize: vertical;
+    min-height: 90px;
+    outline: none;
+    transition: border-color 0.2s;
+    background: var(--blue-bg);
+    line-height: 1.7;
+  }
+  .memo-textarea:focus {
+    border-color: var(--blue-mid);
+    background: var(--white);
+  }
+
+  /* ── CTAバナー ── */
+  .cta-wrap {
+    background: var(--blue-dark);
+    border-radius: 16px;
+    padding: 28px 24px;
+    text-align: center;
+    box-shadow: 0 4px 24px rgba(92,110,126,0.18);
+  }
+  .cta-title {
+    font-family: 'Noto Serif JP', serif;
+    font-size: 15px;
+    color: var(--white);
+    line-height: 1.7;
+    margin-bottom: 6px;
+  }
+  .cta-sub {
+    font-size: 12px;
+    color: var(--blue-light);
+    line-height: 1.8;
+    margin-bottom: 20px;
+  }
+  .cta-btn {
+    display: inline-block;
+    background: var(--green);
+    color: var(--white);
+    font-size: 14px;
+    font-weight: 500;
+    padding: 14px 32px;
+    border-radius: 50px;
+    text-decoration: none;
+    letter-spacing: 0.06em;
+    transition: opacity 0.2s, transform 0.2s;
+  }
+  .cta-btn:hover {
+    opacity: 0.88;
+    transform: translateY(-1px);
+  }
+
+  /* ── フッター ── */
+  .footer {
+    text-align: center;
+    padding: 20px;
+    font-size: 11px;
+    color: var(--gray-mid);
+    letter-spacing: 0.05em;
+  }
+</style>
+</head>
+<body>
+
+<!-- ヘッダー -->
+<div class="hero">
+  <div class="hero-eyebrow">YOHAKU ｜ 余白回復プログラム　無料特典</div>
+  <h1>「<em>抱えすぎ</em>」<br>チェックリスト</h1>
+  <p class="hero-sub">片付けが進まない本当の理由は、「モノが多いから」だけではないかもしれません。<br>タスク・役割・義務感……気づかないうちに、こんなにも背負っていた。</p>
+</div>
+
+<!-- プログレスバー -->
+<div class="progress-wrap">
+  <div class="progress-inner">
+    <div class="progress-bar-bg">
+      <div class="progress-bar-fill" id="progressFill"></div>
+    </div>
+    <div class="progress-label"><span id="progressNum">0</span> / 20</div>
+  </div>
+</div>
+
+<div class="container">
+
+  <!-- セクション 01 -->
+  <div class="section">
+    <div class="section-header">
+      <div class="section-num">01</div>
+      <div class="section-title-wrap">
+        <div class="section-title">タスク・未完了の重さ</div>
+        <div class="section-sub">頭の中にある「やらなきゃ」を確認する</div>
+      </div>
+      <div class="section-score">
+        <div class="section-score-num" id="s1score">0</div>
+        <div class="section-score-den">/ 5</div>
+      </div>
+    </div>
+    <div class="items" data-section="1">
+      <div class="item" onclick="toggle(this)">
+        <div class="checkbox"><svg class="checkmark" width="12" height="12" viewBox="0 0 12 12" fill="none"><polyline points="2,6 5,9 10,3" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+        <div class="item-text">返信できていないLINE・メール・連絡が3件以上ある</div>
+      </div>
+      <div class="item" onclick="toggle(this)">
+        <div class="checkbox"><svg class="checkmark" width="12" height="12" viewBox="0 0 12 12" fill="none"><polyline points="2,6 5,9 10,3" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+        <div class="item-text">「あとでやろう」と思ったまま1週間以上経っているタスクがある</div>
+      </div>
+      <div class="item" onclick="toggle(this)">
+        <div class="checkbox"><svg class="checkmark" width="12" height="12" viewBox="0 0 12 12" fill="none"><polyline points="2,6 5,9 10,3" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+        <div class="item-text">頭の中に「やらなきゃリスト」が常に浮かんでいる</div>
+      </div>
+      <div class="item" onclick="toggle(this)">
+        <div class="checkbox"><svg class="checkmark" width="12" height="12" viewBox="0 0 12 12" fill="none"><polyline points="2,6 5,9 10,3" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+        <div class="item-text">寝る前に「今日もできなかった」と思うことが多い</div>
+      </div>
+      <div class="item" onclick="toggle(this)">
+        <div class="checkbox"><svg class="checkmark" width="12" height="12" viewBox="0 0 12 12" fill="none"><polyline points="2,6 5,9 10,3" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+        <div class="item-text">手帳やメモに書いて、そのままになっているToDoがある</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- セクション 02 -->
+  <div class="section">
+    <div class="section-header">
+      <div class="section-num">02</div>
+      <div class="section-title-wrap">
+        <div class="section-title">役割・責任の重さ</div>
+        <div class="section-sub">「ちゃんとしなきゃ」という見えない圧力</div>
+      </div>
+      <div class="section-score">
+        <div class="section-score-num" id="s2score">0</div>
+        <div class="section-score-den">/ 5</div>
+      </div>
+    </div>
+    <div class="items" data-section="2">
+      <div class="item" onclick="toggle(this)">
+        <div class="checkbox"><svg class="checkmark" width="12" height="12" viewBox="0 0 12 12" fill="none"><polyline points="2,6 5,9 10,3" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+        <div class="item-text">家事・育児・仕事のすべてを自分が回さなければと感じている</div>
+      </div>
+      <div class="item" onclick="toggle(this)">
+        <div class="checkbox"><svg class="checkmark" width="12" height="12" viewBox="0 0 12 12" fill="none"><polyline points="2,6 5,9 10,3" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+        <div class="item-text">人に頼むより自分でやった方が早い・確実だと思っている</div>
+      </div>
+      <div class="item" onclick="toggle(this)">
+        <div class="checkbox"><svg class="checkmark" width="12" height="12" viewBox="0 0 12 12" fill="none"><polyline points="2,6 5,9 10,3" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+        <div class="item-text">「完璧にできない自分」を責めることが多い</div>
+      </div>
+      <div class="item" onclick="toggle(this)">
+        <div class="checkbox"><svg class="checkmark" width="12" height="12" viewBox="0 0 12 12" fill="none"><polyline points="2,6 5,9 10,3" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+        <div class="item-text">家族に申し訳なくて、自分のことは後回しにしがち</div>
+      </div>
+      <div class="item" onclick="toggle(this)">
+        <div class="checkbox"><svg class="checkmark" width="12" height="12" viewBox="0 0 12 12" fill="none"><polyline points="2,6 5,9 10,3" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+        <div class="item-text">「母」「妻」「部下/上司」の役割の中で自分を見失っている</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- セクション 03 -->
+  <div class="section">
+    <div class="section-header">
+      <div class="section-num">03</div>
+      <div class="section-title-wrap">
+        <div class="section-title">判断疲れ・思考の重さ</div>
+        <div class="section-sub">1日3万5千回の判断——どれだけ消耗している？</div>
+      </div>
+      <div class="section-score">
+        <div class="section-score-num" id="s3score">0</div>
+        <div class="section-score-den">/ 5</div>
+      </div>
+    </div>
+    <div class="items" data-section="3">
+      <div class="item" onclick="toggle(this)">
+        <div class="checkbox"><svg class="checkmark" width="12" height="12" viewBox="0 0 12 12" fill="none"><polyline points="2,6 5,9 10,3" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+        <div class="item-text">何を夕食にするか考えるだけで疲れることがある</div>
+      </div>
+      <div class="item" onclick="toggle(this)">
+        <div class="checkbox"><svg class="checkmark" width="12" height="12" viewBox="0 0 12 12" fill="none"><polyline points="2,6 5,9 10,3" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+        <div class="item-text">買い物・予定・進路など「決めること」が重荷に感じる</div>
+      </div>
+      <div class="item" onclick="toggle(this)">
+        <div class="checkbox"><svg class="checkmark" width="12" height="12" viewBox="0 0 12 12" fill="none"><polyline points="2,6 5,9 10,3" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+        <div class="item-text">考えても結論が出ず、先送りしてしまうことが多い</div>
+      </div>
+      <div class="item" onclick="toggle(this)">
+        <div class="checkbox"><svg class="checkmark" width="12" height="12" viewBox="0 0 12 12" fill="none"><polyline points="2,6 5,9 10,3" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+        <div class="item-text">小さなことでもパートナーや子どもに確認しないと不安</div>
+      </div>
+      <div class="item" onclick="toggle(this)">
+        <div class="checkbox"><svg class="checkmark" width="12" height="12" viewBox="0 0 12 12" fill="none"><polyline points="2,6 5,9 10,3" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+        <div class="item-text">「どうすれば正解か」を調べ続けて時間を失っている</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- セクション 04 -->
+  <div class="section">
+    <div class="section-header">
+      <div class="section-num">04</div>
+      <div class="section-title-wrap">
+        <div class="section-title">義務感・我慢の重さ</div>
+        <div class="section-sub">「仕方ない」と思いながら続けていることを見つける</div>
+      </div>
+      <div class="section-score">
+        <div class="section-score-num" id="s4score">0</div>
+        <div class="section-score-den">/ 5</div>
+      </div>
+    </div>
+    <div class="items" data-section="4">
+      <div class="item" onclick="toggle(this)">
+        <div class="checkbox"><svg class="checkmark" width="12" height="12" viewBox="0 0 12 12" fill="none"><polyline points="2,6 5,9 10,3" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+        <div class="item-text">本当は断りたいのに引き受けている予定・誘いがある</div>
+      </div>
+      <div class="item" onclick="toggle(this)">
+        <div class="checkbox"><svg class="checkmark" width="12" height="12" viewBox="0 0 12 12" fill="none"><polyline points="2,6 5,9 10,3" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+        <div class="item-text">会った後にどっと疲れる人との時間が定期的にある</div>
+      </div>
+      <div class="item" onclick="toggle(this)">
+        <div class="checkbox"><svg class="checkmark" width="12" height="12" viewBox="0 0 12 12" fill="none"><polyline points="2,6 5,9 10,3" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+        <div class="item-text">「NOと言いたいけど言えない」場面が週に1回以上ある</div>
+      </div>
+      <div class="item" onclick="toggle(this)">
+        <div class="checkbox"><svg class="checkmark" width="12" height="12" viewBox="0 0 12 12" fill="none"><polyline points="2,6 5,9 10,3" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+        <div class="item-text">我慢していること・後回しにしている感情が浮かぶ</div>
+      </div>
+      <div class="item" onclick="toggle(this)">
+        <div class="checkbox"><svg class="checkmark" width="12" height="12" viewBox="0 0 12 12" fill="none"><polyline points="2,6 5,9 10,3" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+        <div class="item-text">「これは私がやるべきこと」と思い込んでいる家事がある</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- スコアパネル -->
+  <div class="score-wrap">
+    <div class="score-header">
+      <div class="score-header-label">わたしの「抱えすぎ度」</div>
+      <div class="score-total"><span id="totalScore">0</span>/ 20</div>
+    </div>
+    <div class="score-bars">
+      <div class="score-row">
+        <div class="score-row-label">01 タスク・未完了</div>
+        <div class="mini-bar-bg"><div class="mini-bar-fill" id="bar1" style="background:var(--blue-mid)"></div></div>
+        <div class="score-row-val" id="bar1val">0/5</div>
+      </div>
+      <div class="score-row">
+        <div class="score-row-label">02 役割・責任</div>
+        <div class="mini-bar-bg"><div class="mini-bar-fill" id="bar2" style="background:var(--green)"></div></div>
+        <div class="score-row-val" id="bar2val">0/5</div>
+      </div>
+      <div class="score-row">
+        <div class="score-row-label">03 判断疲れ</div>
+        <div class="mini-bar-bg"><div class="mini-bar-fill" id="bar3" style="background:var(--blue-mid)"></div></div>
+        <div class="score-row-val" id="bar3val">0/5</div>
+      </div>
+      <div class="score-row">
+        <div class="score-row-label">04 義務感・我慢</div>
+        <div class="mini-bar-bg"><div class="mini-bar-fill" id="bar4" style="background:var(--green)"></div></div>
+        <div class="score-row-val" id="bar4val">0/5</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 判定メッセージ -->
+  <div class="result-wrap" id="resultWrap">
+    <div class="result-tag" id="resultTag"></div>
+    <div class="result-body">
+      <div class="result-title" id="resultTitle"></div>
+      <div class="result-desc" id="resultDesc"></div>
+    </div>
+  </div>
+
+  <!-- 振り返りメモ -->
+  <div class="memo-wrap">
+    <div class="memo-label">振り返りメモ</div>
+    <div class="memo-sub">いちばん「下ろしたい」と感じたのはどれですか？自由に書いてみてください。</div>
+    <textarea class="memo-textarea" placeholder="気づいたことを書いてみましょう…"></textarea>
+  </div>
+
+  <!-- CTA -->
+  <div class="cta-wrap">
+    <div class="cta-title">気づきが生まれたら、それが余白回復の第一歩です。</div>
+    <div class="cta-sub">次のステップは動画セミナーでお伝えします。<br>ゆっくり受け取ってください。</div>
+    <a href="https://youtu.be/RicduVQWr5Y" target="_blank" rel="noopener" class="cta-btn">動画セミナーを見る</a>
+  </div>
+
+</div>
+
+<div class="footer">© Shinobu U.K. ｜ 余白回復プログラム</div>
+
+<script>
+  const scores = [0, 0, 0, 0];
+
+  const results = [
+    {
+      level: 0,
+      tag: '余白あり　0〜5',
+      title: '今の状態を大切に。\nそのままの自分で片づけをスタートできます。',
+      desc: 'チェックが少ない方は、心に余裕がある状態です。この余白を活かして、モノの片づけに着手するタイミングが整っています。'
+    },
+    {
+      level: 1,
+      tag: '要注意　6〜10',
+      title: '抱えすぎが、片づけの邪魔をしています。',
+      desc: 'チェックの多かったセクションが、今のあなたの「重荷の正体」です。まず1つだけ、下ろせそうなものを見つけてみましょう。それが余白回復の第一歩になります。'
+    },
+    {
+      level: 2,
+      tag: 'かなり重め　11〜15',
+      title: 'たくさん背負ってきましたね。\nまず「下ろせるもの」を1つ見つけましょう。',
+      desc: '片づけより先に、心の荷物を整理することが必要なサインです。「これは本当に私がやるべきことか？」という問いを、日常のどこかで立ててみてください。'
+    },
+    {
+      level: 3,
+      tag: '下ろす時　16〜20',
+      title: 'もう十分、頑張ってきました。\n片づけより先に、この重さを下ろしてください。',
+      desc: '今すぐ片づけを始めようとしなくて大丈夫です。抱えすぎに気づいたこと自体が、大きな一歩。余白回復プログラムでは、ここから一緒に整えていきます。'
+    }
+  ];
+
+  function toggle(el) {
+    const isChecked = el.classList.toggle('checked');
+    const section = parseInt(el.closest('[data-section]').dataset.section);
+    scores[section - 1] += isChecked ? 1 : -1;
+    updateAll();
+  }
+
+  function updateAll() {
+    const total = scores.reduce((a, b) => a + b, 0);
+
+    // プログレス
+    document.getElementById('progressFill').style.width = (total / 20 * 100) + '%';
+    document.getElementById('progressNum').textContent = total;
+
+    // セクションスコア
+    scores.forEach((s, i) => {
+      document.getElementById('s' + (i+1) + 'score').textContent = s;
+      const bar = document.getElementById('bar' + (i+1));
+      bar.style.width = (s / 5 * 100) + '%';
+      document.getElementById('bar' + (i+1) + 'val').textContent = s + '/5';
+    });
+
+    // 合計
+    document.getElementById('totalScore').textContent = total;
+
+    // 判定
+    let level = 0;
+    if (total >= 16) level = 3;
+    else if (total >= 11) level = 2;
+    else if (total >= 6) level = 1;
+
+    const r = results[level];
+    const wrap = document.getElementById('resultWrap');
+    wrap.className = 'result-wrap level-' + level + (total > 0 ? ' visible' : '');
+    document.getElementById('resultTag').textContent = r.tag;
+    document.getElementById('resultTitle').textContent = r.title;
+    document.getElementById('resultDesc').textContent = r.desc;
+  }
+</script>
+</body>
+</html>
